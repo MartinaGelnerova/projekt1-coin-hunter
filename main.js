@@ -20,3 +20,26 @@ mince.style.left = `${getRandomInt(0, w+1-36)}px`;
 mince.style.top = `${getRandomInt(0, h+1-36)}px`;
 panacek.style.left = `${getRandomInt(0, w+1-64)}px`;
 panacek.style.top = `${getRandomInt(0, h+1-70)}px`;
+
+//tady řeším POHYB A ZMĚNA OBRÁZKU PANÁČKA při stisku šipek
+function stiskKlavesy (event) {
+  let klavesa = event.keyCode;
+  console.log(klavesa);
+  if (klavesa === 37) { //left
+    panacekPoziceHor = parseInt(panacek.style.left) -10;
+    panacek.style.left = `${panacekPoziceHor}px`;
+    document.getElementById('panacek').src = `obrazky/panacek-vlevo.png`;
+  } else if (klavesa === 38) { //up
+    panacekPoziceVer = parseInt(panacek.style.top) -10;
+    panacek.style.top = `${panacekPoziceVer}px`;
+    document.getElementById('panacek').src = `obrazky/panacek-nahoru.png`;
+  } else if (klavesa === 39) { //right
+    panacekPoziceHor = parseInt(panacek.style.left) +10;
+    panacek.style.left = `${panacekPoziceHor}px`;
+    document.getElementById('panacek').src = `obrazky/panacek-vpravo.png`;
+  } else if (klavesa === 40) { //up
+    panacekPoziceVer = parseInt(panacek.style.top) +10;
+    panacek.style.top = `${panacekPoziceVer}px`;
+    document.getElementById('panacek').src = `obrazky/panacek.png`;
+  }
+}
