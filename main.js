@@ -9,51 +9,80 @@ let mince = document.querySelector('#mince');
 let panacek = document.querySelector('#panacek');
 
 // tady řeším NÁHODNÉ UMÍSTĚNÍ MINCE A PANÁČKA po celé ploše minus 36px (v/š mince), aby se mi neschovala
-var w = window.innerWidth;
-var h = window.innerHeight;
-var panacekH = 70;
-var panacekW = 64;
+var windowW = window.innerWidth;
+var windowH = window.innerHeight;
+var panacekSirka = panacek.naturalWidth;
+var panacekVyska = panacek.naturalHeight;
+var minceSirka = mince.naturalWidth;
+var minceVyska = mince.naturalHeight;
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
-mince.style.left = `${getRandomInt(0, w + 1 - panacekW)}px`;
-mince.style.top = `${getRandomInt(0, h + 1 - panacekH)}px`;
-panacek.style.left = `${getRandomInt(0, w + 1 - panacekW)}px`;
-panacek.style.top = `${getRandomInt(0, h + 1 - panacekH)}px`;
+mince.style.left = `${getRandomInt(0, windowW + 1 - minceSirka)}px`;
+mince.style.top = `${getRandomInt(0, windowH + 1 - minceVyska)}px`;
+panacek.style.left = `${getRandomInt(0, windowW + 1 - panacekSirka)}px`;
+panacek.style.top = `${getRandomInt(0, windowH + 1 - panacekVyska)}px`;
 
 //tady řeším POHYB A ZMĚNA OBRÁZKU PANÁČKA při stisku šipek + omezení pohybu na viditelnou plochu
 function stiskKlavesy (event) {
   let klavesa = event.keyCode;
+  panacekX = parseInt(panacek.style.left);
+  panacekY = parseInt(panacek.style.top);
+  minceX = parseInt(mince.style.left)
+  minceY = parseInt(mince.style.top)
+  krok = 10
+  let skore = parseInt(document.getElementById('score').innerHTML);
   console.log(klavesa);
   if (klavesa === 37) { //left
     document.getElementById('panacek').src = `obrazky/panacek-vlevo.png`;
-    panacekPoziceHor = parseInt(panacek.style.left)
-    if (panacekPoziceHor > 0 + 10) {
-      panacekPoziceHor = panacekPoziceHor -10;
-      panacek.style.left = `${panacekPoziceHor}px`;
+    if (panacekX > (0 + krok)) {
+      panacekX = panacekX - krok;
+      panacek.style.left = `${panacekX}px`;
+      if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
+        skore = skore + 1;
+        document.getElementById('score').innerHTML = skore;
+        mince.style.left = `${getRandomInt(0, windowW + 1 - minceSirka)}px`;
+        mince.style.top = `${getRandomInt(0, windowH + 1 - minceVyska)}px`;
+      }
     }
   } else if (klavesa === 38) { //up
     document.getElementById('panacek').src = `obrazky/panacek-nahoru.png`;
-    panacekPoziceVer = parseInt(panacek.style.top)
-    if (panacekPoziceVer > 0 + 10) {
-      panacekPoziceVer = panacekPoziceVer -10;
-      panacek.style.top = `${panacekPoziceVer}px`;
+    if (panacekY > (0 + krok)) {
+      panacekY = panacekY - krok;
+      panacek.style.top = `${panacekY}px`;
+      if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
+        skore = skore + 1;
+        document.getElementById('score').innerHTML = skore;
+        mince.style.left = `${getRandomInt(0, windowW + 1 - minceSirka)}px`;
+        mince.style.top = `${getRandomInt(0, windowH + 1 - minceVyska)}px`;
+      }
     }
   } else if (klavesa === 39) { //right
     document.getElementById('panacek').src = `obrazky/panacek-vpravo.png`;
-    panacekPoziceHor = parseInt(panacek.style.left)
-    if ((panacekPoziceHor + panacekW) < w - 10) {
-      panacekPoziceHor = panacekPoziceHor +10;
-      panacek.style.left = `${panacekPoziceHor}px`;
+    if ((panacekX + krok) < (windowW - panacekSirka)) {
+      panacekX = panacekX + krok;
+      panacek.style.left = `${panacekX}px`;
+      if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
+        skore = skore + 1;
+        document.getElementById('score').innerHTML = skore;
+        mince.style.left = `${getRandomInt(0, windowW + 1 - minceSirka)}px`;
+        mince.style.top = `${getRandomInt(0, windowH + 1 - minceVyska)}px`;
+      }
     }
   } else if (klavesa === 40) { //down
     document.getElementById('panacek').src = `obrazky/panacek.png`;
-    panacekPoziceVer = parseInt(panacek.style.top)
-    if ((panacekPoziceVer + panacekH) < h - 10) {
-      panacekPoziceVer = panacekPoziceVer +10;
-      panacek.style.top = `${panacekPoziceVer}px`;
+    if ((panacekY + krok) < (windowH - panacekVyska)) {
+      panacekY = panacekY + krok;
+      panacek.style.top = `${panacekY}px`;
+      if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
+        skore = skore + 1;
+        document.getElementById('score').innerHTML = skore;
+        mince.style.left = `${getRandomInt(0, windowW + 1 - minceSirka)}px`;
+        mince.style.top = `${getRandomInt(0, windowH + 1 - minceVyska)}px`;
+      }
     }
   }
 }
