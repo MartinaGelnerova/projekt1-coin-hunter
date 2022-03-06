@@ -39,6 +39,7 @@ function stiskKlavesy (event) {
   let skore = parseInt(document.getElementById('score').innerHTML);
   audioFile.play();
   let zvukMince = document.getElementById('zvukmince');
+  let fanfara = document.getElementById('zvukfanfara');
     if (klavesa === 37) { //left
     document.getElementById('panacek').src = `obrazky/panacek-vlevo.png`;
     if (panacekX > (0 + krok)) {
