@@ -12,7 +12,6 @@ let audioFile = document.getElementById('hudba');
 let zvukMince = document.getElementById('zvukmince');
 let zvukFanfara = document.getElementById('zvukfanfara');
 let skore = 0
-//audioFile.play();
 
 
 function getRandomInt(min, max) {
@@ -27,7 +26,6 @@ function priNacteniStranky() {
 	novaMince();
   umistiPanacka();
   document.getElementById('score').innerHTML = skore;
-  document.getElementById('hudba').muted = false;
 }
 
 // funkce, která umístí panáčka na jeho souřadnice
@@ -49,6 +47,8 @@ function novaMince() {
 // kde lze najít např. i vlastnost "key",
 // která obsahuje znak stisknuté klávesy
 function priStiskuKlavesy(event) {
+  audioFile.play();
+  document.getElementById('hudba').muted = false;
   let klavesa = event.keyCode;
   console.log(klavesa);
   panacekX = parseInt(panacek.style.left);
