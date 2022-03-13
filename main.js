@@ -10,6 +10,7 @@ let windowW = window.innerWidth;
 let windowH = window.innerHeight;
 let audioFile = document.getElementById('hudba');
 let zvukMince = document.getElementById('zvukmince');
+let zvukFanfara = document.getElementById('zvukfanfara');
 let skore = parseInt(document.getElementById('score').innerHTML);
 audioFile.play();
 
@@ -25,6 +26,7 @@ function getRandomInt(min, max) {
 function priNacteniStranky() {
 	novaMince();
   umistiPanacka();
+  document.getElementById('score').innerHTML = 0;
 }
 
 // funkce, která umístí panáčka na jeho souřadnice
@@ -60,6 +62,7 @@ function priStiskuKlavesy(event) {
       panacekX = panacekX - krok;
       panacek.style.left = `${panacekX}px`;
       otestujKolizi();
+      vyhra()
     }
   } else if (klavesa === 38) { //up
     document.getElementById('panacek').src = `obrazky/panacek-nahoru.png`;
@@ -67,6 +70,7 @@ function priStiskuKlavesy(event) {
       panacekY = panacekY - krok;
       panacek.style.top = `${panacekY}px`;
       otestujKolizi();
+      vyhra()
     }
   } else if (klavesa === 39) { //right
     document.getElementById('panacek').src = `obrazky/panacek-vpravo.png`;
@@ -74,6 +78,7 @@ function priStiskuKlavesy(event) {
       panacekX = panacekX + krok;
       panacek.style.left = `${panacekX}px`;
       otestujKolizi();
+      vyhra()
     }
   } else if (klavesa === 40) { //down
     document.getElementById('panacek').src = `obrazky/panacek.png`;
@@ -81,6 +86,7 @@ function priStiskuKlavesy(event) {
       panacekY = panacekY + krok;
       panacek.style.top = `${panacekY}px`;
       otestujKolizi();
+      vyhra()
     }
   }
 }
@@ -93,5 +99,13 @@ function otestujKolizi() {
     skore = skore + 1;
     document.getElementById('score').innerHTML = skore;
     novaMince();
+  }
+}
+
+function vyhra(){
+  if (skore === 5) {
+    document.getElementById('score').innerHTML = `${skore} => VYHRÁL JSI!`
+    zvukFanfara.play();
+    console.log('Zvuk fanfáry...');
   }
 }
