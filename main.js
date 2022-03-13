@@ -12,7 +12,7 @@ let audioFile = document.getElementById('hudba');
 let zvukMince = document.getElementById('zvukmince');
 let zvukFanfara = document.getElementById('zvukfanfara');
 let skore = 0
-audioFile.play();
+//audioFile.play();
 
 
 function getRandomInt(min, max) {
