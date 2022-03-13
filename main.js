@@ -12,7 +12,7 @@ let audioFile = document.getElementById('hudba');
 let zvukMince = document.getElementById('zvukmince');
 let zvukFanfara = document.getElementById('zvukfanfara');
 let skore = parseInt(document.getElementById('score').innerHTML);
-
+audioFile.play();
 
 
 function getRandomInt(min, max) {
@@ -48,7 +48,6 @@ function novaMince() {
 // kde lze najít např. i vlastnost "key",
 // která obsahuje znak stisknuté klávesy
 function priStiskuKlavesy(event) {
-  audioFile.play();
   let klavesa = event.keyCode;
   console.log(klavesa);
   panacekX = parseInt(panacek.style.left);
