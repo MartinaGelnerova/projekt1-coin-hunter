@@ -11,7 +11,6 @@ let windowH = window.innerHeight;
 let audioFile = document.getElementById('hudba');
 let zvukMince = document.getElementById('zvukmince');
 let zvukFanfara = document.getElementById('zvukfanfara');
-let skore = parseInt(document.getElementById('score').innerHTML);
 audioFile.play();
 
 
@@ -96,6 +95,7 @@ function otestujKolizi() {
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
     zvukMince.play();
     console.log('Zvuk mince...');
+    let skore = parseInt(document.getElementById('score').innerHTML);
     skore = skore + 1;
     document.getElementById('score').innerHTML = skore;
     novaMince();
@@ -103,6 +103,7 @@ function otestujKolizi() {
 }
 
 function vyhra(){
+  let skore = parseInt(document.getElementById('score').innerHTML);
   if (skore === 5) {
     document.getElementById('score').innerHTML = `${skore} => VYHRÁL JSI!`
     zvukFanfara.play();
