@@ -27,7 +27,6 @@ function priNacteniStranky() {
 	novaMince();
   umistiPanacka();
   document.getElementById('score').innerHTML = 0;
-  audioFile.play();
 }
 
 // funkce, která umístí panáčka na jeho souřadnice
@@ -49,6 +48,7 @@ function novaMince() {
 // kde lze najít např. i vlastnost "key",
 // která obsahuje znak stisknuté klávesy
 function priStiskuKlavesy(event) {
+  audioFile.play();
   let klavesa = event.keyCode;
   console.log(klavesa);
   panacekX = parseInt(panacek.style.left);
