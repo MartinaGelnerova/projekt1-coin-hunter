@@ -92,10 +92,10 @@ function priStiskuKlavesy(event) {
 
 // fuknce pro otestování kolize panáčka s mincí
 function otestujKolizi() {
+  let skore = parseInt(document.getElementById('score').innerHTML);
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
     zvukMince.play();
     console.log('Zvuk mince...');
-    let skore = parseInt(document.getElementById('score').innerHTML);
     skore = skore + 1;
     document.getElementById('score').innerHTML = skore;
     novaMince();
