@@ -12,7 +12,7 @@ let audioFile = document.getElementById('hudba');
 let zvukMince = document.getElementById('zvukmince');
 let zvukFanfara = document.getElementById('zvukfanfara');
 let skore = 0
-//audioFile.play();
+audioFile.play();
 
 
 function getRandomInt(min, max) {
@@ -27,6 +27,7 @@ function priNacteniStranky() {
 	novaMince();
   umistiPanacka();
   document.getElementById('score').innerHTML = skore;
+  document.getElementById('hudba').muted = false;
 }
 
 // funkce, která umístí panáčka na jeho souřadnice
